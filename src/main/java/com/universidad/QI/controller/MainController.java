@@ -12,5 +12,10 @@ public class MainController {
 	public String index() {
 		return "index";
 	}
+
+	@GetMapping("/cursos")
+	public String cursos() {
+	return "cursos.html";
+	}
 	
 }
