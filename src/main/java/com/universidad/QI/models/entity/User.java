@@ -23,7 +23,17 @@ public class User implements Serializable{
 	
 	
 	public User() {
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	public User(String id, String username, String password, String name, String lastname, String dni) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.lastname = lastname;
+		this.dni = dni;
 	}
 
 	public String getId() {
