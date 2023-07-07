@@ -3,6 +3,18 @@ spring:
         url: jdbc:mysql://localhost:3306/universidad?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8
         username: root
         password: root
+        driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+     hibernate:
+      ddl-auto: update
+spring.security.user.name: user
+spring.security.user.password: 1234
+spring.servlet.multipart.max-file-size: 5MB
+spring.servlet.multipart.max-request-size: 5MBspring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/universidad?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8
+        username: root
+        password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
      hibernate:
