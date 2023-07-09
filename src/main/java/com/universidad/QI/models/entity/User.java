@@ -4,11 +4,16 @@ import java.io.Serializable;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.universidad.QI.Enums.Role;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Serializable{
 	
 	@Id
@@ -20,13 +25,13 @@ public class User implements Serializable{
 	private String name;
 	private String lastname;
 	private String dni;
-	
-	
+	private Role role;
+
 	public User() {
 		
 	}
 
-	public User(String id, String username, String password, String name, String lastname, String dni) {
+	public User(String id, String username, String password, String name, String lastname, String dni,Role role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -34,6 +39,15 @@ public class User implements Serializable{
 		this.name = name;
 		this.lastname = lastname;
 		this.dni = dni;
+		this.role = role;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getId() {

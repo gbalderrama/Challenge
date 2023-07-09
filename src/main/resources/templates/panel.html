@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
 <head>
-    <div th:replace="fragments/fragments.html :: head"></div>
-    <title th:value="Panel de ${usuario.role}"></title>
+    <div th:replace="fragments/fragments.html :: head_panel"></div>
+    <title>algo</title>
 </head>
 <body>
-    <div th:replace="fragments/fragments.html :: navbar"></div>
-    
-    
+    <header id="content">
+        <div th:replace="fragments/fragments.html :: navbar"></div>
+    </header>
+    <br>
+    <div class="container">
+        <h1>Hola me llamo Geronomio</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+    </div>
     
     
     <div th:replace="fragments/fragments.html :: footer"></div>

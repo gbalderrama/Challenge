@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -18,21 +19,20 @@ public class Course {
 	private String id;
 	private String name;
 	private String shift;
-	@OneToMany
-	private List<Teacher> teachers;
-	@OneToMany
+	private Teacher teacher;
+	@ManyToMany
 	private List<Student> students;
 	
 	public Course() {
 		
 	}
 	
-	public Course(String id, String name, String shift, List<Teacher> teachers, List<Student> students) {
+	public Course(String id, String name, String shift, Teacher teacher, List<Student> students) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.shift = shift;
-		this.teachers = teachers;
+		this.teacher = teacher;
 		this.students = students;
 	}
 
@@ -60,12 +60,12 @@ public class Course {
 		this.shift = shift;
 	}
 
-	public List<Teacher> getTeachers() {
-		return teachers;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 	public List<Student> getStudents() {
