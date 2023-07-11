@@ -18,10 +18,6 @@ public class MainController {
 	return "cursos.html";
 	}
 	
-	@GetMapping("/panel")
-	public String panel() {
-		return "panel";
-	}
 	
 }
 

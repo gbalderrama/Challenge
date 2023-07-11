@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <div th:replace="/fragments/fragments.html :: head"></div>
+    <div th:replace="~{/fragments/fragments.html :: head}"></div>
     <link rel="stylesheet" th:href="@{css/cursos.css}">
     <title>Cursos</title>
 </head>
 
 <body>
     <header>
-        <div th:replace="/fragments/fragments.html :: navbar"></div>
+        <div th:replace="~{/fragments/fragments.html :: navbar}"></div>
     </header>
     <div class="sample-header">
         <div class="sample-header-section">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </section>
-<div th:replace="fragments/fragments.html :: footer" >
+<div th:replace="~{fragments/fragments.html :: footer}" >
 
 </div>
 </body>

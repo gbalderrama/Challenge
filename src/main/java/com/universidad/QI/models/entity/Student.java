@@ -3,17 +3,19 @@ package com.universidad.QI.models.entity;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class Student extends User{
 	
 	@OneToMany
-	private List<Course> cursos;
+	private List<Course> course;
 
 	public Student(List<Course> cursos) {
 		super();
-		this.cursos = cursos;
+		this.course = cursos;
 	}
 
 	public Student() {
@@ -21,11 +23,11 @@ public class Student extends User{
 	}
 
 	public List<Course> getCursos() {
-		return cursos;
+		return course;
 	}
 
 	public void setCursos(List<Course> cursos) {
-		this.cursos = cursos;
+		this.course = cursos;
 	}
 
 }

@@ -9,7 +9,7 @@ import jakarta.persistence.OneToMany;
 public class Teacher extends User{
 
 	@OneToMany
-	private List<Course> cursos;
+	private List<Course> course;
 	
 
 	public Teacher() {
@@ -18,15 +18,15 @@ public class Teacher extends User{
 
 	public Teacher(List<Course> cursos) {
 		super();
-		this.cursos = cursos;
+		this.course = cursos;
 	}
 
 	public List<Course> getCursos() {
-		return cursos;
+		return course;
 	}
 
 	public void setCursos(List<Course> cursos) {
-		this.cursos = cursos;
+		this.course = cursos;
 	}
 	
 }

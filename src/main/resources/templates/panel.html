@@ -1,27 +1,142 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <div th:replace="fragments/fragments.html :: head_panel"></div>
-    <title>algo</title>
+    <div th:replace="~{fragments/fragments.html :: head_panel}"></div>
+
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="css/dataTables.tableTools.css">
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.tableTools.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{css/panel.css}">
+    <title>Panel de control</title>
 </head>
+
 <body>
     <header id="content">
-        <div th:replace="fragments/fragments.html :: navbar"></div>
+        <div th:replace="~{fragments/fragments.html :: navbar}"></div>
     </header>
     <br>
-    <div class="container">
-        <h1>Hola me llamo Geronomio</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis ea, minus eos fugit consectetur accusantium blanditiis error autem doloremque, quidem incidunt cupiditate! Nesciunt, assumenda maxime nobis exercitationem sint repellat!</p>
+    <div class="container mt-5">
+        <section>
+            <h1 class="text-center">Panel de usuario</h1>
+            <p>Acá se veran una serie de herramientas para el usuario</p>
+            <br>
+            <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#addUser"
+                id="add_user_btn">Agregar usuario</button>
+            <div th:replace="~{fragments/fragments.html :: modal_add_user}"></div>
+            <br>
+            <table class="table table-dark table-striped table-hover mt-3" id="users">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>usuario</th>
+                        <th>Rol</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody th:each="usuario : ${usuarios}">
+                    <tr>
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.name}"></td>
+                        <td th:text="${usuario.lastname}"></td>
+                        <td th:text="${usuario.role}"></td>
+                        <td><a th:value="${usuario.id}" th:href="@{/panel/edit}+'?id='+${usuario.id}"><button
+                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editUser"
+                                    id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
+                        <td><a th:href="@{/panel/delete}+'?id='+${usuario.id}" class="btn btn-danger"><i
+                                    class="fa-regular fa-trash-can"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:replace="~{fragments/fragments.html :: modal_edit_user}"></div>
+            <p th:if="${usuarios.isEmpty}">No hay usuarios para mostrar</p>
+        </section>
+        <section>
+            <h1 class="text-center">Panel de Cursos</h1>
+            <p>Acá se veran una serie de herramientas para los cursos</p>
+            <br>
+            <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#modal_course"
+                id="add_user_btn">Agregar curso</button>
+            <div th:replace="~{fragments/fragments.html :: modal_add_course}"></div>
+            <br>
+            <table class="table table-dark table-striped table-hover mt-3">
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Turno</th>
+                <th>Docente</th>
+                <th>Ver alumnos</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+                <tbody th:each="curso : ${cursos}">
+                    <tr>
+                        <td th:text="${curso.id}"></td>
+                        <td th:text="${curso.name}"></td>
+                        <td th:text="${curso.shift}"></td>
+                        <td th:text="${curso.teacher} ? ${curso.teacher.lastname}: 'Sin profesor'"></td>
+                        <td><a th:value="${curso.id}" th:href="@{/panel/couse-students}+'?id='+${curso.id}"><button
+                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
+                                    id="edit_user_btn"><i class="fa-solid fa-users"></i></button></a></td>
+                        <td><a th:value="${curso.id}" th:href="@{/panel/edit_course}+'?id='+${curso.id}"><button
+                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
+                                    id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
+                        <td><a th:href="@{/panel/delete_course}+'?id='+${curso.id}" class="btn btn-danger"><i
+                                    class="fa-regular fa-trash-can"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:replace="~{fragments/fragments.html :: modal_add_course}"></div>
+            <p th:if="${cursos.isEmpty}">No hay cursos para mostrar</p>
+        </section>
     </div>
-    
-    
-    <div th:replace="fragments/fragments.html :: footer"></div>
+
+    <div th:replace="~{fragments/fragments.html :: footer}"></div>
 </body>
+<script>
+    $(document).ready(function () {
+
+        if (window.location.href.indexOf('?') > -1) {
+            $('#editUser').modal('show');
+        }
+
+        let teacher = $('#select-teacher').selectize({
+            sortField: 'text',
+            maxItems: 1
+        });
+        $('#select-students').selectize({
+            sortField: 'text',
+            maxItems: null
+        });
+
+        // teacher.style.widht
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+        $('#users').dataTable({
+            "language": {
+                "sSearch": "Buscar en la lista:",
+                "lengthMenu": "Mostrar _MENU_ resultados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Sig.",
+                    "previous": "Ant.",
+                },
+            },
+            "bFilter": true,
+            "bInfo": true,
+            "bPaginate": true,
+            "order": [
+                [10, 25, 50, "asc"]
+            ],
+        });
+
+    });
+</script>
+
 </html>

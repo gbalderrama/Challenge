@@ -78,3 +78,10 @@ footer {
   position: relative;
   display: flex;
 }
+
+.table{
+  /* padding: 1em; */
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}
