@@ -1,5 +1,7 @@
 package com.universidad.QI.Enums;
 
+
+
 public enum Role {
 
 	ADMIN("ADMIN"),

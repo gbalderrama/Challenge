@@ -4,11 +4,20 @@ import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.universidad.QI.Enums.Role;
+import com.universidad.QI.Enums.Shift;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Course {
@@ -18,8 +27,12 @@ public class Course {
 	@GenericGenerator(name = "uuid", strategy ="uuid2")
 	private String id;
 	private String name;
-	private String shift;
+	@Enumerated(EnumType.STRING)
+	private Shift shift;
+	
+	@ManyToOne
 	private Teacher teacher;
+	
 	@ManyToMany
 	private List<Student> students;
 	
@@ -27,7 +40,7 @@ public class Course {
 		
 	}
 	
-	public Course(String id, String name, String shift, Teacher teacher, List<Student> students) {
+	public Course(String id, String name, Shift shift, Teacher teacher, List<Student> students) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -52,11 +65,11 @@ public class Course {
 		this.name = name;
 	}
 
-	public String getShift() {
+	public Shift getShift() {
 		return shift;
 	}
 
-	public void setShift(String shift) {
+	public void setShift(Shift shift) {
 		this.shift = shift;
 	}
 

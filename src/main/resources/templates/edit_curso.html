@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <div th:replace="~{/fragments/fragments.html :: head}"></div>
+    <link rel="stylesheet" th:href="@{css/cursos.css}">
+    <title>Cursos</title>
+</head>
+
+<body>
+    <header>
+        <div th:replace="~{/fragments/fragments.html :: navbar}"></div>
+    </header>
+    <div class="container-sm mt-5">
+        <div class="card mt-3">
+            <div class="card-header mt-3">
+                <h2>Editar curso "<span th:text="${course.name}"></span>"</h2>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/panel/add_curso}" method="POST" th:object="${course}" id="course_form">
+                        <input type="text" th:field="*{id}" hidden>
+                        <div class="form-group justify-content-center">
+                            <label for="name">Nombre</label>
+                            <input type="text" th:field="*{name}"  class="form-control mb-2" placeholder="Curso de electronica" maxlength="20" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group-addon" for="shift">Shift</div>
+                            <select th:field="*{shift}" class="form-select mb-2" required>
+                                <option th:each="shift : ${shifts}" th:value="${shift}" th:text="${shift}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group-addon" for="teacher">Docente</div>
+                            <select th:field="*{teacher}" class="form-select mb-2">
+                                <option value="">Sin docente asignado</option>
+                                <option th:each="teacher : ${teachers}" th:value="${teacher}" th:text="${teacher.lastname}+' '+${teacher.lastname}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group-addon" for="students">Alumnos</div>
+                            <select th:field="*{students}" class="form-select mb-2" multiple>
+                                <option value="">Sin estudiantes asignados...</option>
+                                <option th:each="student : ${students}" th:value="${student}" th:text="${student.lastname}+' '+${student.name}"></option>
+                            </select>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-secondary m-3" th:href="@{/panel}">Volver</a>
+                            <button type="submit" class="btn btn-success">Crear</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

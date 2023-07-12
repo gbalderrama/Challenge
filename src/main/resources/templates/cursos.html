@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <div th:replace="/fragments/fragments.html :: head"></div>
+    <div th:replace="~{/fragments/fragments.html :: head}"></div>
     <link rel="stylesheet" th:href="@{css/cursos.css}">
     <title>Cursos</title>
 </head>
 
 <body>
     <header>
-        <div th:replace="/fragments/fragments.html :: navbar"></div>
+        <div th:replace="~{/fragments/fragments.html :: navbar}"></div>
     </header>
     <div class="sample-header">
         <div class="sample-header-section">
@@ -22,63 +22,44 @@
 
             <div id="content">
                 <div class="container">
+                    <!-- <div th:each="curso : ${cursos}"> -->
+                        <div class="box" >
+                            <div class="imgbox">
+                            </div>
+                            <div class="detail">
+
+                                <h1>Curso 1</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
+                            </div>
+                        </div>
+                    <!-- </div> -->
                     <div class="box">
                         <div class="imgbox">
-                            <!-- <img src="../static/images/malbec.jpg" alt="" srcset=""> -->
+                            <img src="../static/images/malbec.jpg" alt="" srcset=""> 
                         </div>
                         <div class="detail">
 
-                            <h1>Malbec</h1>
-                            <p>Malbec es un acogedor y luminoso departamento, dónde podrás respirar un aire de sepa
-                                mendocina
-                                🍇, decorado
-                                con rincones que te invitan a descorchar un rico vino🍷🍷, para compartir en pareja o
-                                con amigos 👩‍👩‍👧👫.
-
-                                Estadías inolvidables! Viví la experiencia de ser Nuestro huésped.</p>
+                            <h1>Curso 2</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="imgbox">
-                            <!-- <img src="../static/images/malbec.jpg" alt="" srcset=""> -->
+                            <img src="../static/images/malbec.jpg" alt="" srcset=""> 
                         </div>
                         <div class="detail">
 
-                            <h1>Malbec</h1>
-                            <p>Malbec es un acogedor y luminoso departamento, dónde podrás respirar un aire de sepa
-                                mendocina
-                                🍇, decorado
-                                con rincones que te invitan a descorchar un rico vino🍷🍷, para compartir en pareja o
-                                con
-                                amigos👩‍👩‍👧👫.
-
-                                Estadías inolvidables! Viví la experiencia de ser Nuestro huésped.</p>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <!-- <img src="../static/images/malbec.jpg" alt="" srcset=""> -->
-                        </div>
-                        <div class="detail">
-
-                            <h1>Malbec</h1>
-                            <p>Malbec es un acogedor y luminoso departamento, dónde podrás respirar un aire de sepa
-                                mendocina
-                                🍇, decorado
-                                con rincones que te invitan a descorchar un rico vino🍷🍷, para compartir en pareja o
-                                con
-                                amigos👩‍👩‍👧👫.
-
-                                Estadías inolvidables! Viví la experiencia de ser Nuestro huésped.</p>
+                            <h1>Curso 3</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<div th:replace="fragments/fragments.html :: footer" >
+    <div th:replace="~{fragments/fragments.html :: footer}">
 
-</div>
+    </div>
 </body>
 
 </html>

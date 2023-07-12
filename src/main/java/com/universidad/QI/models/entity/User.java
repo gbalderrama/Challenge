@@ -7,6 +7,8 @@ import org.hibernate.annotations.GenericGenerator;
 import com.universidad.QI.Enums.Role;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -25,6 +27,7 @@ public class User implements Serializable{
 	private String name;
 	private String lastname;
 	private String dni;
+	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	public User() {
@@ -32,7 +35,7 @@ public class User implements Serializable{
 	}
 
 	public User(String id, String username, String password, String name, String lastname, String dni,Role role) {
-		super();
+		
 		this.id = id;
 		this.username = username;
 		this.password = password;
