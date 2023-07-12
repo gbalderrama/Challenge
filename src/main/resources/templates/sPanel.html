@@ -5,10 +5,13 @@
     <div th:replace="~{fragments/fragments.html :: head_panel}"></div>
 
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="css/dataTables.tableTools.css">
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.tableTools.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
         integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-    <script type="text/javascript" language="javascript" th:src="@{/js/validaciones.js}"></script>
-
+    <link rel="stylesheet" th:href="@{css/panel.css}">
     <title>Panel de control</title>
 </head>
 
@@ -79,7 +82,7 @@
                         <td><a th:value="${curso.id}" th:href="@{/panel/couse-students}+'?id='+${curso.id}"><button
                                     class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
                                     id="edit_user_btn"><i class="fa-solid fa-users"></i></button></a></td>
-                        <td><a th:value="${curso.id}" th:href="@{/teacher/edit_course}+'?id='+${curso.id}"><button
+                        <td><a th:value="${curso.id}" th:href="@{/panel/edit_course}+'?id='+${curso.id}"><button
                                     class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
                                     id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
                         <td><a th:href="@{/panel/delete_course}+'?id='+${curso.id}" class="btn btn-danger"><i
@@ -96,6 +99,7 @@
 </body>
 <script>
     $(document).ready(function () {
+
         if (window.location.href.indexOf('?') > -1) {
             $('#editUser').modal('show');
         }
@@ -113,7 +117,7 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-        /* $('#users').dataTable({
+        $('#users').dataTable({
             "language": {
                 "sSearch": "Buscar en la lista:",
                 "lengthMenu": "Mostrar _MENU_ resultados",
@@ -130,12 +134,6 @@
             "order": [
                 [10, 25, 50, "asc"]
             ],
-        });  */
-        $('#dni').keypress(function (event) {
-            var charCode = (event.which) ? event.which : event.keyCode;
-            if (charCode < 48 || charCode > 57) {
-                event.preventDefault();
-            }
         });
 
     });

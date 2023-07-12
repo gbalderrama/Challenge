@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.universidad.QI.models.entity.Course;
@@ -32,12 +33,13 @@ public class StudentService {
 	}
 	@Transactional
 	public Student save(User user) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Student student = new Student();
 		student.setId(user.getId());
 		student.setName(user.getName());
 		student.setLastname(user.getLastname());
 		student.setUsername(user.getUsername());
-		student.setPassword(user.getPassword());
+		student.setPassword(encoder.encode(user.getPassword()));
 		student.setRole(user.getRole());
 		return studentRepository.save(student);
 	}

@@ -1,13 +1,17 @@
 package com.universidad.QI.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.universidad.QI.models.entity.Course;
 import com.universidad.QI.models.entity.Teacher;
 import com.universidad.QI.models.entity.User;
+import com.universidad.QI.repository.CourseRepository;
 import com.universidad.QI.repository.TeacherRepository;
 
 import jakarta.transaction.Transactional;
@@ -18,6 +22,9 @@ public class TeacherService {
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	@Autowired
+	private CourseRepository courseRepository;
+	
 	@Transactional
 	public Teacher save(Teacher teacher) {
 		return teacherRepository.save(teacher);
@@ -26,11 +33,12 @@ public class TeacherService {
 	@Transactional
 	public Teacher save(User user) {
 		Teacher teacher = new Teacher();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		teacher.setId(user.getId());
 		teacher.setName(user.getName());
 		teacher.setLastname(user.getLastname());
 		teacher.setUsername(user.getUsername());
-		teacher.setPassword(user.getPassword());
+		teacher.setPassword(encoder.encode(user.getPassword()));
 		teacher.setRole(user.getRole());
 		return teacherRepository.save(teacher);
 	}
@@ -55,6 +63,15 @@ public class TeacherService {
 			teacher = optional.get();
 		}
 		return teacher;
+	}
+	
+	public List<Course> findAssigned(String id){
+		Optional<Teacher> optional = teacherRepository.findById(id);
+		List<Course> cursos = new ArrayList<>();
+		if(optional.isPresent()) {
+			cursos = courseRepository.findassingned(optional.get().getId());
+		}
+		return cursos;
 	}
 	
 }

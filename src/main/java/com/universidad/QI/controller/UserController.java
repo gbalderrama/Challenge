@@ -1,10 +1,8 @@
 package com.universidad.QI.controller;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +67,7 @@ public class UserController {
 			model.addAttribute("user", new User());
 
 		}
+		model.addAttribute("cursos", courseService.listAll());
 		model.addAttribute("usuarios", userService.listAll());
 		model.addAttribute("roles", Role.values());
 		return "panel";

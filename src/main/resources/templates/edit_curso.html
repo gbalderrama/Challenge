@@ -31,14 +31,14 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group-addon" for="teacher">Docente</div>
-                            <select th:field="*{teacher}" class="form-select mb-2" required>
+                            <select th:field="*{teacher}" class="form-select mb-2">
                                 <option value="">Sin docente asignado</option>
                                 <option th:each="teacher : ${teachers}" th:value="${teacher}" th:text="${teacher.lastname}+' '+${teacher.lastname}"></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <div class="input-group-addon" for="students">Alumnos</div>
-                            <select th:field="*{students}" class="form-select mb-2" multiple required>
+                            <select th:field="*{students}" class="form-select mb-2" multiple>
                                 <option value="">Sin estudiantes asignados...</option>
                                 <option th:each="student : ${students}" th:value="${student}" th:text="${student.lastname}+' '+${student.name}"></option>
                             </select>
