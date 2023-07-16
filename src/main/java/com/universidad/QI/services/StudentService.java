@@ -37,11 +37,13 @@ public class StudentService {
 		Student student = new Student();
 		student.setId(user.getId());
 		student.setName(user.getName());
+		student.setDni(user.getDni());
 		student.setLastname(user.getLastname());
 		student.setUsername(user.getUsername());
 		student.setPassword(encoder.encode(user.getPassword()));
 		student.setRole(user.getRole());
 		return studentRepository.save(student);
+		
 	}
 
 	@Transactional
@@ -69,8 +71,8 @@ public class StudentService {
 			for (Student student : course.getStudents()) {
 				Optional<Student> optionalS = studentRepository.findById(student.getId());
 				if	(optionalS.isPresent()) {
-					student = optionalS.get();
-					student.getCursos().add(course);
+					Student tempStudent = optionalS.get();
+					tempStudent.getCourses().add(course);
 				}
 			}
 		}
@@ -93,11 +95,60 @@ public class StudentService {
 		if(optional.isPresent()) {
 		
 			
-			lista = studentRepository.studentAvailable(optional.get().getId());
+			//lista = studentRepository.studentAvailable(optional.get().getId());
 		}
 		return lista;
 	}
+	public List<Student> findAllById(List<String> collect) {
+		
+		return studentRepository.findAllById(collect);
+	}
+	
+	
+	public Student findById(String student_id) throws Exception {
+		if (studentRepository.findById(student_id).isPresent()) {
+			
+			return studentRepository.findById(student_id).get();
+		}else {
+			throw new Exception("No se encuentra el estudiante indicado");
+		}
+	}
 
+	//Busca todos los estudiantes de un curso
+	
+	public List<Student> findAllByCoursesId(String id) throws Exception{
+		List<Student> lista = studentRepository.findAllByCoursesId(id);
+		if(!lista.isEmpty()) {
+			return lista;
+		}else {
+			throw new Exception("No tiene alumnos asignados");
+		}
+	}
 
+	public List<Student> findByCursosContaining(Course course) throws Exception{
+		Optional<Course> optional = courseRepository.findById(course.getId());
+		List<Student> lista = new ArrayList<>();
+		if(optional.isPresent()) {
+			lista = studentRepository.findAllByCoursesId(optional.get().getId());
+			return lista;
+			
+		}else {
+			throw new Exception("no existe el curso indicado");
+		}
+	}
+	
+	public List<Student> findByCourseNotContaining(String id) throws Exception{
+		Optional<Course> optional = courseRepository.findById(id);
+		if(optional.isPresent()) {
+			
+			return studentRepository.findByCourseNotContaining(optional.get());
+		}else {
+			throw new Exception("El curso es invalido");
+		}
+	}
+	
+	public List<Student> saveAll(List<Student> alumnos){
+		return studentRepository.saveAll(alumnos);
+	}
 
 }
