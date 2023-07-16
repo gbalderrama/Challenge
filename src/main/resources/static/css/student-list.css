@@ -1,0 +1,42 @@
+.container-sm {
+    display: block;
+    padding-top: 5rem;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.table-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+#alumnosAsignadosTable {
+    margin-right: 0.5rem;
+}
+
+#alumnosNoAsignadosTable {
+    margin-left: 0.5rem;
+}
+
+.col{
+    padding: 2rem;
+}

@@ -4,29 +4,20 @@ import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity 
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Teacher extends User{
 
-	@OneToMany
+	@OneToMany(mappedBy = "teacher")
 	private List<Course> course;
 	
 
-	public Teacher() {
-		super();
-	}
 
-	public Teacher(List<Course> cursos) {
-		super();
-		this.course = cursos;
-	}
-
-	public List<Course> getCursos() {
-		return course;
-	}
-
-	public void setCursos(List<Course> cursos) {
-		this.course = cursos;
-	}
 	
 }

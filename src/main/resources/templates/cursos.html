@@ -22,37 +22,14 @@
 
             <div id="content">
                 <div class="container">
-                    <!-- <div th:each="curso : ${cursos}"> -->
-                        <div class="box" >
+                        <div class="box" th:each="curso : ${cursos}">
                             <div class="imgbox">
                             </div>
                             <div class="detail">
-
-                                <h1>Curso 1</h1>
+                                <h1 th:text="${curso.name}"></h1>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
                             </div>
                         </div>
-                    <!-- </div> -->
-                    <div class="box">
-                        <div class="imgbox">
-                            <img src="../static/images/malbec.jpg" alt="" srcset=""> 
-                        </div>
-                        <div class="detail">
-
-                            <h1>Curso 2</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img src="../static/images/malbec.jpg" alt="" srcset=""> 
-                        </div>
-                        <div class="detail">
-
-                            <h1>Curso 3</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe possimus vitae consequuntur error quo repudiandae laboriosam omnis sapiente enim inventore odit, vel nostrum ea quisquam asperiores ex praesentium vero?</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

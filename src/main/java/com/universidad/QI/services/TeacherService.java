@@ -37,6 +37,7 @@ public class TeacherService {
 		teacher.setId(user.getId());
 		teacher.setName(user.getName());
 		teacher.setLastname(user.getLastname());
+		teacher.setDni(user.getDni());
 		teacher.setUsername(user.getUsername());
 		teacher.setPassword(encoder.encode(user.getPassword()));
 		teacher.setRole(user.getRole());

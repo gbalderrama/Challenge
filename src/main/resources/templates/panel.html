@@ -3,66 +3,89 @@
 
 <head>
     <div th:replace="~{fragments/fragments.html :: head_panel}"></div>
-
+    <!-- jquery -->
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
+
+    <!-- Selectize CSS -->
+    <link rel="stylesheet" th:href="@{css/selectize.default.css}">
+    <link rel="stylesheet" th:href="@{/css/table.curso.css}">
+    <!-- Selectize js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
         integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <script type="text/javascript" language="javascript" th:src="@{/js/validaciones.js}"></script>
 
+
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+    <!-- Selectize JavaScript -->
+    <script th:src="@{js/selectize.min.js}"></script>
     <title>Panel de control</title>
 </head>
 
 <body>
+    <script>
+        $(document).ready(function () {
+
+            if (window.location.href.indexOf('course_users') > -1) {
+                $('#modal_course_students').modal('show');
+                const moverDerechaBtn = document.getElementById('moverDerechaBtn');
+
+            }
+
+        });</script>
     <header id="content">
         <div th:replace="~{fragments/fragments.html :: navbar}"></div>
     </header>
     <br>
     <div class="container mt-5">
         <section>
-            <h1 class="text-center">Panel de usuario</h1>
-            <p>Acá se veran una serie de herramientas para el usuario</p>
+            <h1 class="text-center">Panel de Administrador</h1>
+            <h4>Listado de usuarios</h4>
             <br>
             <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#addUser"
                 id="add_user_btn">Agregar usuario</button>
-            <div th:replace="~{fragments/fragments.html :: modal_add_user}"></div>
-            <br>
-            <table class="table table-dark table-striped table-hover mt-3" id="users">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Nombre</th>
-                        <th>usuario</th>
-                        <th>Rol</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody th:each="usuario : ${usuarios}">
-                    <tr>
-                        <td th:text="${usuario.id}"></td>
-                        <td th:text="${usuario.name}"></td>
-                        <td th:text="${usuario.lastname}"></td>
-                        <td th:text="${usuario.role}"></td>
-                        <td><a th:value="${usuario.id}" th:href="@{/panel/edit}+'?id='+${usuario.id}"><button
-                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editUser"
-                                    id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
-                        <td><a th:href="@{/panel/delete}+'?id='+${usuario.id}" class="btn btn-danger"><i
+                <div th:replace="~{fragments/fragments.html :: modal_add_user}"></div>
+                <br>
+                <table class="table table-dark table-striped table-hover mt-3" id="users">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nombre</th>
+                            <th>usuario</th>
+                            <th>Rol</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td th:text="${usuario.id}"></td>
+                            <td th:text="${usuario.name}"></td>
+                            <td th:text="${usuario.lastname}"></td>
+                            <td th:text="${usuario.role}"></td>
+                            <td><a th:value="${usuario.id}" th:href="@{/panel/edit}+'?id='+${usuario.id}"><button
+                                class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editUser"
+                                id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
+                                <td><a th:href="@{/panel/delete}+'?id='+${usuario.id}" class="btn btn-danger"><i
                                     class="fa-regular fa-trash-can"></i></a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div th:replace="~{fragments/fragments.html :: modal_edit_user}"></div>
-            <p th:if="${usuarios.isEmpty}">No hay usuarios para mostrar</p>
-        </section>
-        <section>
-            <h1 class="text-center">Panel de Cursos</h1>
-            <p>Acá se veran una serie de herramientas para los cursos</p>
-            <br>
-            <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#modal_course"
-                id="add_user_btn">Agregar curso</button>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div th:replace="~{fragments/fragments.html :: modal_edit_user}"></div>
+                        <p th:if="${usuarios.isEmpty}">No hay usuarios para mostrar</p>
+                    </section>
+                    <section class="mt-5">
+                        <h4>Listado de Cursos</h4>
+                        <br>
+                        <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#modal_course"
+                        id="add_user_btn">Agregar curso</button>
+
             <div th:replace="~{fragments/fragments.html :: modal_add_course}"></div>
             <br>
-            <table class="table table-dark table-striped table-hover mt-3">
+            <table class="table table-dark table-striped table-hover mt-3" id="courses_list">
                 <th>id</th>
                 <th>Nombre</th>
                 <th>Turno</th>
@@ -70,35 +93,39 @@
                 <th>Ver alumnos</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
-                <tbody th:each="curso : ${cursos}">
-                    <tr>
+                <tbody>
+                    <tr th:each="curso : ${cursos}">
                         <td th:text="${curso.id}"></td>
                         <td th:text="${curso.name}"></td>
                         <td th:text="${curso.shift}"></td>
                         <td th:text="${curso.teacher} ? ${curso.teacher.lastname}: 'Sin profesor'"></td>
-                        <td><a th:value="${curso.id}" th:href="@{/panel/couse-students}+'?id='+${curso.id}"><button
-                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
-                                    id="edit_user_btn"><i class="fa-solid fa-users"></i></button></a></td>
-                        <td><a th:value="${curso.id}" th:href="@{/teacher/edit_course}+'?id='+${curso.id}"><button
-                                    class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_course"
-                                    id="edit_user_btn"><i class="fa-solid fa-pen"></i></button></a></td>
-                        <td><a th:href="@{/panel/delete_course}+'?id='+${curso.id}" class="btn btn-danger"><i
-                                    class="fa-regular fa-trash-can"></i></a></td>
+                        <td><a th:value="${curso.id}" id="course_students" th:href="@{/panel/course_users/}+${curso.id}">
+                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modal_course_students">
+                            <i class="fa-solid fa-users"></i></button></a></td>
+                        <td><a th:value="${curso.id}" th:href="@{/panel/edit_course}+'?id='+${curso.id}">
+                            <button class="btn btn-success" id="edit_course_btn">
+                            <i class="fa-solid fa-pen"></i></button></a></td>
+                        <td><a th:href="@{/panel/delete_course}+'?id='+${curso.id}" class="btn btn-danger">
+                            <i class="fa-regular fa-trash-can"></i></a></td>
                     </tr>
                 </tbody>
             </table>
-            <div th:replace="~{fragments/fragments.html :: modal_add_course}"></div>
             <p th:if="${cursos.isEmpty}">No hay cursos para mostrar</p>
         </section>
     </div>
+
 
     <div th:replace="~{fragments/fragments.html :: footer}"></div>
 </body>
 <script>
     $(document).ready(function () {
-        if (window.location.href.indexOf('?') > -1) {
+        if (window.location.href.indexOf('edit') > -1) {
             $('#editUser').modal('show');
         }
+
+
+
+
 
         let teacher = $('#select-teacher').selectize({
             sortField: 'text',
@@ -113,24 +140,24 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-        /* $('#users').dataTable({
+        let tablaUsuarios = $('#users').dataTable({
             "language": {
-                "sSearch": "Buscar en la lista:",
-                "lengthMenu": "Mostrar _MENU_ resultados",
+                "search": "Buscar en la lista:",
+                "slengthMenu": [10, 25, 50, 100],
+                "pageLength": 25,
                 "paginate": {
                     "first": "Primero",
-                    "last": "Ultimo",
+                    "last": "Último",
                     "next": "Sig.",
-                    "previous": "Ant.",
-                },
+                    "previous": "Ant."
+                }
             },
-            "bFilter": true,
-            "bInfo": true,
-            "bPaginate": true,
-            "order": [
-                [10, 25, 50, "asc"]
-            ],
-        });  */
+            "filter": true,
+            "paginate": true,
+        });
+
+
+
         $('#dni').keypress(function (event) {
             var charCode = (event.which) ? event.which : event.keyCode;
             if (charCode < 48 || charCode > 57) {
@@ -138,7 +165,34 @@
             }
         });
 
+        // SOLO CARACTERES ALFABETICOS EN EL NOMBRE Y APELLIDO
+        $('#name').on('input', function () {
+            var inputVal = $(this).val();
+            var sanitizedVal = inputVal.replace(/\s{2,}/g, ' ').replace(/[^a-zA-Z\s]/g, '');
+            $(this).val(sanitizedVal);
+        });
+
+        $('#lastname').on('input', function () {
+            var inputVal = $(this).val();
+            var sanitizedVal = inputVal.replace(/\s{2,}/g, ' ').replace(/[^a-zA-Z\s]/g, '');
+            $(this).val(sanitizedVal);
+        });
+
+        $('#username').on('input', function () {
+            var inputVal = $(this).val();
+            var sanitizedVal = inputVal.replace(/[^a-zA-Z0-9]+(\s+[^a-zA-Z0-9]+)*/g, '');
+            $(this).val(sanitizedVal);
+        });
+        //********************************
+
+        // MINUSCULAS EN EL USUARIO
+        $('#myInput').on('input', function () {
+            var inputVal = $(this).val();
+            var lowerCaseVal = inputVal.toLowerCase();
+            $(this).val(lowerCaseVal);
+        });
     });
+
 </script>
 
 </html>

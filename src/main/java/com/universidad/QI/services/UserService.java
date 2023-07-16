@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.universidad.QI.Enums.Role;
 import com.universidad.QI.models.entity.User;
+import com.universidad.QI.repository.StudentRepository;
 import com.universidad.QI.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -47,6 +48,8 @@ public class UserService  {
 		return userRepository.findById(id);
 		
 	}
+	
+	
 
 	@Transactional
 	public void delete(User user) {

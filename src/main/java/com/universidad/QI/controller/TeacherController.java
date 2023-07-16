@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,11 +30,11 @@ public class TeacherController {
 	private CourseService courseService;
 	
 	
-	@GetMapping("")
-	public String teacherPanel(Model model,@RequestParam String id) {
+	@GetMapping("/{teacher_id}")
+	public String teacherPanel(Model model,@PathVariable String teacher_id) {
 		
 		model.addAttribute("cursos", courseService.listAll());
-		model.addAttribute("cursos_asignados", teacherService.findAssigned(id));
+		model.addAttribute("cursos_asignados", teacherService.findAssigned(teacher_id));
 		
 		return "tPanel";
 	}

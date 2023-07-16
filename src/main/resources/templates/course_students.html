@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <div th:replace="~{/fragments/fragments.html :: head_panel}"></div>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/student-list.css}">
+    <title>Cursos</title>
+</head>
+
+<body>
+    <header>
+        <div th:replace="~{/fragments/fragments.html :: navbar}"></div>
+    </header>
+    <div class="container-sm mt-5">
+        <div class="table-container">
+            <div class="row">
+                <h2>Editar curso "<span th:text="${course.name}"></span>"</h2>
+            </div>
+            <div class="col">
+                <form th:action="@{/panel/delete_student_from_course/}+${course.id}" method="POST">
+                    <br>
+                    <h4>Alumnos asignados al curso:</h4>
+                    <table id="alumnosAsignadosTable" class="table table-striped table-hover table-light text-center">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>DNI</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="asignado : ${asignados}">
+                                <td><input type="checkbox" name="alumnos" th:value="${asignado.id}"></td>
+                                <td th:value="${asignado.dni}" th:text="${asignado.dni}"></td>
+                                <td th:value="${asignado.lastname}" th:text="${asignado.lastname}"></td>
+                                <td th:value="${asignado.name}" th:text="${asignado.name}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${error}" class="alert alert-danger">
+                        <p th:text="${error}"></p>
+                    </div>
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                </form>
+            </div>
+            <br>
+            <div class="col">
+                <h4>Alumnos fuera del curso:</h4>
+                <form th:action="@{/panel/add_student_curso/}+${course.id}" method="POST">
+                    <table id="alumnosNoAsignadosTable"
+                        class="table table-striped table-hover table-primary text-center">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>DNI</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="alumno : ${alumnos}">
+                                <td><input type="checkbox" name="agrega_alumnos" th:value="${alumno.id}"></td>
+                                <td th:value="${alumno.dni}" th:text="${alumno.dni}"></td>
+                                <td th:value="${alumno.dni}" th:text="${alumno.lastname}"></td>
+                                <td th:value="${alumno.dni}" th:text="${alumno.name}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success" type="submit">Agregar</button>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+
+            <a th:href="@{/panel}" class="btn btn-outline-dark justify-content-center">VOLVER AL PANEL</a>
+        </div>
+    </div>
+    
+</body>
+
+</html>

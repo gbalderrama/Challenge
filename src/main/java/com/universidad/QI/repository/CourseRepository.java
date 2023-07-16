@@ -17,5 +17,6 @@ public interface CourseRepository extends JpaRepository<Course, String>{
 
 	@Query("SELECT c FROM Course c WHERE c.teacher.id = ?1")
 	List<Course> findassingned(@Param("teacher") String teacher);
+	
 
 }
