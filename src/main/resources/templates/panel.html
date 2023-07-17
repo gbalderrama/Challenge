@@ -42,7 +42,7 @@
     <br>
     <div class="container mt-5">
         <section>
-            <h1 class="text-center">Panel de Administrador</h1>
+            <h1 class="text-center">Panel de Administrador <span th:text="${logueado?.name}"></span></h1>
             <h4>Listado de usuarios</h4>
             <br>
             <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#addUser"

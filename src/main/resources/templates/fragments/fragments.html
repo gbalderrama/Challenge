@@ -19,8 +19,17 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-                    <button class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                        id="btn_login">Login</button>
+                    <div class="btn-group">
+                        <a class="nav-link" th:href="@{/login}" id="btn_login"><button class="btn btn-dark">Login</button></a>
+                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item nav-link" th:href="@{/logout}"><button class="btn btn-dark">Logout</button></a></li>
+                        </ul>
+                    </div>
+                    <!-- <a class="nav-link" th:href="@{/login}" id="btn_login">Login</a> -->
                 </span>
             </div>
         </div>
@@ -33,12 +42,12 @@
 <div th:fragment="head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{css/style.css}">
     <script type="text/javascript" th:src="@{js/index.js}"></script>
     <script src="https://kit.fontawesome.com/28cd6522e8.js" crossorigin="anonymous"></script>
@@ -71,23 +80,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex m-lg-3">
-                    <form action="/login" method="POST">
+                    <form th:action="@{/login}" method="POST">
                         <div class="form-group justify-content-center">
                             <label for="user">Ingrese su usuario</label><br>
-                            <input type="text" name="" id="user" class="form-control-lg mt-3"
+                            <input type="text" name="username" id="user" class="form-control-lg mt-3"
                                 placeholder="nombreUsuario" required>
                         </div>
                         <div class="form-group">
                             <label for="pass">Ingrese su contraseña</label><br>
-                            <input type="password" name="" id="pass" class="form-control-lg mt-3" placeholder="pepe123"
-                                required><br>
+                            <input type="password" name="password" id="pass" class="form-control-lg mt-3"
+                                placeholder="pepe123" required><br>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
@@ -194,12 +203,12 @@
                             <input type="text" th:field="*{password}" class="form-control mb-2" placeholder="pepe123"
                                 required><br>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <a th:href="@{/panel}" class="btn btn-secondary">Cerrar</a>
                     <button type="submit" class="btn btn-success">Crear</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

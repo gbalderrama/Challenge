@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <div th:replace="~{/fragments/fragments.html :: head}"></div>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center flex-column justify-content-center sample-section-wrap mt-5">
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+        <div class="card bg-light mt-5 ">
+            <div class="card-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+            </div>
+            <div class="card-body flex m-lg-3">
+                <form th:action="@{/loginchk}" method="POST">
+                    <div class="form-group justify-content-center">
+                        <label for="user">Ingrese su usuario</label><br>
+                        <input type="text" name="username" id="user" class="form-control-lg mt-3"
+                            placeholder="nombreUsuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Ingrese su contraseña</label><br>
+                        <input type="password" name="password" id="pass" class="form-control-lg mt-3"
+                            placeholder="pepe123" required><br>
+                    </div>
+                    <div class="card-footer">
+                        <a th:href="@{/index}" class="btn btn-secondary">Volver</a>
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
