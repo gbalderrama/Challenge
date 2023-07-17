@@ -157,9 +157,9 @@ public class UserController {
 	// Eliminacion del usuario
 	
 	@GetMapping("delete")
-	public String delete(@RequestParam(required = true) String id) {
+	public String delete(@RequestParam(required = true) String id) throws Exception {
 
-		userService.deleteById(id);
+		userService.deleteById(id); 
 
 		return "redirect:/panel";
 	}

@@ -156,7 +156,7 @@
             <div class="modal-content bg-light">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editUser">Editar usuario</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <a th:href="@{/panel}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                 </div>
                 <div class="modal-body flex m-lg-3">
                     <form th:action="@{/panel/add_user}" method="POST" th:object="${user}" id="editForm">

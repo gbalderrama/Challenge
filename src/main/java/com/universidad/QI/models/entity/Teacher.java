@@ -9,13 +9,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class Teacher extends User{
 
 	@OneToMany(mappedBy = "teacher")
-	private List<Course> course;
+	@Getter @Setter private List<Course> course;
+
+	public Teacher(List<Course> course) {
+		super();
+		this.course = course;
+	}
+	public Teacher() {
+		
+	}
+	/**
+	 * @return the course
+	 */
+	public List<Course> getCourse() {
+		return course;
+	}
+
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(List<Course> course) {
+		this.course = course;
+	}
 	
 
 

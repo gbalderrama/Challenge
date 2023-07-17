@@ -65,6 +65,14 @@ public class TeacherService {
 		}
 		return teacher;
 	}
+	public Teacher findById(String id) throws Exception {
+		Optional<Teacher> optional = teacherRepository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}else {
+			throw new Exception("No se encuentra el profe");
+		}
+	}
 	
 	public List<Course> findAssigned(String id){
 		Optional<Teacher> optional = teacherRepository.findById(id);
@@ -73,6 +81,11 @@ public class TeacherService {
 			cursos = courseRepository.findassingned(optional.get().getId());
 		}
 		return cursos;
+	}
+
+	public void delete(Teacher teacher) {
+		teacherRepository.delete(teacher);
+		
 	}
 	
 }
